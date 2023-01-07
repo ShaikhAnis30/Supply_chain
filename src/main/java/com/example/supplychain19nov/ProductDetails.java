@@ -39,6 +39,7 @@ public class ProductDetails {
         ObservableList<Product> items = Product.getAllProducts();
 
         productTable = new TableView<>();
+        productTable.setStyle(" -fx-background-color: blue;");
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         productTable.setItems(items); // added all items of observable list into productTable
         productTable.getColumns().addAll(id, name, price); // added all columns into productTable
@@ -64,6 +65,8 @@ public class ProductDetails {
         ObservableList<Product> items = Product.getProductsByName(searchName);
 
         productTable = new TableView<>();
+        productTable.setStyle(" -fx-background-color: blue;");
+
         productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         productTable.setItems(items); // added all items of observable list into productTable
         productTable.getColumns().addAll(id, name, price); // added all columns into productTable

@@ -12,7 +12,7 @@ public class DatabaseConnection {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             statement = conn.createStatement();
         }catch (Exception e){
-            e.printStackTrace();
+                e.printStackTrace();
         }
         return statement;
     }

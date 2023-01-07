@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SupplyChain extends Application {
 
@@ -30,6 +31,7 @@ public class SupplyChain extends Application {
     Label loginLabel;
 
     Button orderButton;
+    Button cartButton;
 
     private GridPane headerBar(){
         GridPane gridPane = new GridPane();
@@ -106,7 +108,39 @@ public class SupplyChain extends Application {
             }
         });
 
+        // cart button
+
+        cartButton = new Button("Add to cart");
+        cartButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(!loggedIn) {
+                    bodyPane.getChildren().clear();
+                    bodyPane.getChildren().add(loginPage());
+                }else {
+                    ArrayList<Product> cart = new ArrayList<Product>();
+                    Product product = productDetails.getSelectedProduct();
+                    if(product != null) {
+                        cart.add(product); // added to list
+                        String email = loginLabel.getText();
+                        email = email.substring(10);
+                        System.out.println(email);
+                        if(Order.placeSingleOrder(product,email)){
+                            System.out.println("Order Successfully added to cart");
+                        }else{
+                            System.out.println("Order not added");
+                        }
+                    }else{
+                        System.out.println("Please select a product");
+                    }
+                }
+            }
+        });
+
+
         gridPane.add(orderButton,0,0);
+        gridPane.setHgap(2);
+        gridPane.add(cartButton,2,0);
         gridPane.setMinWidth(width);
         gridPane.setTranslateY(height+60); // not orderButton it should be gridPane
         return gridPane;
